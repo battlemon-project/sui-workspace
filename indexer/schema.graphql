@@ -1,0 +1,53 @@
+
+"""
+Implement the DateTime<Utc> scalar
+
+The input/output is a string in RFC3339 format.
+"""
+scalar DateTime
+
+
+
+
+type MutationRoot {
+	insertNftToken(nftToken: NftTokenInput!): NftToken!
+}
+
+type NftToken {
+	id: String!
+	type: String!
+	owner: String!
+	url: String!
+	traits: [Trait!]!
+	createdAt: DateTime!
+}
+
+input NftTokenInput {
+	id: String!
+	type: String!
+	owner: String!
+	url: String!
+	traits: [TraitInput!]!
+	createdAt: DateTime!
+}
+
+type QueryRoot {
+	nftTokens: [NftToken!]!
+	nftToken(id: String!): NftToken!
+}
+
+
+type Trait {
+	name: String!
+	flavour: String!
+}
+
+input TraitInput {
+	name: String!
+	flavour: String!
+}
+
+schema {
+	query: QueryRoot
+	mutation: MutationRoot
+}

@@ -1,0 +1,51 @@
+[package]
+name = "battlemon_backend"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "battlemon_backend"
+
+[dependencies]
+# async runtime
+tokio = { version = "1.17.0", features = ["macros", "rt-multi-thread"] }
+# server
+axum = { version = "0.6.1", features = ["http2", "ws"] }
+hyper = { version = "0.14.23", features = ["server"] }
+# error handling
+anyhow = "1.0.67"
+thiserror = "1.0.38"
+# logging
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.15", features = ["registry", "env-filter"] }
+tracing-bunyan-formatter = "0.3.2"
+tracing-log = "0.1.3"
+# serializatioc
+serde = { version = "1.0.149", features = ["derive"] }
+# graphql
+async-graphql = "5.0.3"
+# database
+sqlx = { version = "0.6.2", default-features = false, features = ["runtime-tokio-rustls", "macros", "postgres", "chrono", "migrate", "offline", "decimal", "json"] }
+# configuration
+config = { version = "0.13.3", default-features = false, features = ["toml"] }
+# battlemon models
+models = { path = "../models" }
+
+[dev-dependencies]
+reqwest = "0.11.13"
+
+[build-dependencies]
+# graphql
+async-graphql = "5.0.3"
+# error handling
+anyhow = "1.0.67"
+# battlemon models
+models = { path = "../models" }
+# database
+sqlx = { version = "0.6.2", default-features = false, features = ["runtime-tokio-rustls", "macros", "postgres", "chrono", "migrate", "offline", "decimal", "json"] }
+# logging
+tracing = "0.1.37"

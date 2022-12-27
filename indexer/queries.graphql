@@ -1,0 +1,15 @@
+mutation InsertNftToken($id: String!, $type: String!, $owner: String!, $url: String!, $traits: [TraitInput!]!, $created_at: DateTime!) {
+    insertNftToken(
+        nftToken: {
+            id: $id
+            type: $type
+            owner: $owner
+            url: $url
+            traits: $traits
+            createdAt: $created_at
+        }
+    ) {
+        id
+        type
+    }
+}
