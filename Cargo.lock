@@ -799,6 +799,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "backend"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-graphql",
+ "axum 0.6.1",
+ "config 0.13.3",
+ "hyper",
+ "models",
+ "reqwest",
+ "serde 1.0.152",
+ "sqlx 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "thiserror",
+ "tokio",
+ "tracing",
+ "tracing-bunyan-formatter",
+ "tracing-log",
+ "tracing-subscriber 0.3.15",
+]
+
+[[package]]
 name = "backoff"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -850,27 +871,6 @@ name = "base64ct"
 version = "1.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b645a089122eccb6111b4f81cbc1a49f5900ac4666bb93ac027feaecf15607bf"
-
-[[package]]
-name = "battlemon_backend"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-graphql",
- "axum 0.6.1",
- "config 0.13.3",
- "hyper",
- "models",
- "reqwest",
- "serde 1.0.152",
- "sqlx 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
- "tokio",
- "tracing",
- "tracing-bunyan-formatter",
- "tracing-log",
- "tracing-subscriber 0.3.15",
-]
 
 [[package]]
 name = "bcs"
@@ -3820,6 +3820,7 @@ name = "indexer"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "async-graphql",
  "chrono",
  "config 0.13.3",
  "futures",
@@ -3828,6 +3829,7 @@ dependencies = [
  "reqwest",
  "serde 1.0.152",
  "serde_json",
+ "sqlx 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "tokio",
  "tracing",

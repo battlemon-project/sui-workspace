@@ -2,7 +2,7 @@ use crate::schema::{MutationRoot, QueryRoot};
 use async_graphql::{EmptySubscription, Schema};
 use std::{fs::File, io::Write};
 
-#[path = "src/graphql.rs"]
+#[path = "../backend/src/graphql.rs"]
 mod schema;
 
 fn main() {

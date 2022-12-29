@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
-use battlemon_backend::startup::App;
-use battlemon_backend::{config, telemetry};
+use backend::startup::App;
+use backend::{config, telemetry};
 use tracing::info;
 
 #[tokio::main]
