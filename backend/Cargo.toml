@@ -14,7 +14,7 @@ name = "backend"
 # async runtime
 tokio = { workspace = true }
 # server
-axum = { version = "0.6.1", features = ["http2", "ws"] }
+axum = { version = "0.6.1", features = ["http2", "ws", "macros"] }
 hyper = { version = "0.14.23", features = ["server"] }
 # error handling
 anyhow = { workspace = true }
