@@ -7,6 +7,7 @@ use std::str::FromStr;
 pub struct Config {
     pub app: AppConfig,
     pub db: DatabaseConfig,
+    pub graphql: GraphQlConfig,
 }
 
 #[derive(Deserialize, Clone, Debug)]
@@ -36,6 +37,11 @@ impl DatabaseConfig {
     pub fn with_db(&self) -> PgConnectOptions {
         self.without_db().database(&self.db_name)
     }
+}
+
+#[derive(Deserialize, Clone, Debug)]
+pub struct GraphQlConfig {
+    pub playground_route: String,
 }
 
 pub fn load_config() -> Result<Config> {

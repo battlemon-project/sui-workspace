@@ -9,8 +9,6 @@ use hyper::server::conn::AddrIncoming;
 use sqlx::postgres::PgPoolOptions;
 use sqlx::PgPool;
 use std::net::TcpListener;
-use tokio::fs::File;
-use tokio::io::AsyncWriteExt;
 use tracing::info;
 
 type HyperServer = Server<AddrIncoming, IntoMakeService<Router>>;
@@ -33,8 +31,8 @@ impl App {
 
         info!("Compose GraphQL Schema");
         let graphql_schema = build_graphql_schema(&db_pool);
-        let server =
-            setup_server(listener, db_pool, graphql_schema).context("Failed to setup server")?;
+        let server = setup_server(listener, db_pool, graphql_schema, config)
+            .context("Failed to setup server")?;
 
         Ok(Self { port, server })
     }
@@ -54,10 +52,12 @@ pub fn setup_server(
     listener: TcpListener,
     pool: PgPool,
     graphql_schema: BattlemonSchema,
+    config: Config,
 ) -> Result<HyperServer> {
     let state = AppState {
-        db: pool,
-        graphql: graphql_schema,
+        pool,
+        graphql_schema,
+        config,
     };
 
     let router = setup_router(state);
