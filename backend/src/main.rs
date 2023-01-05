@@ -5,8 +5,7 @@ use tracing::info;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let subscriber =
-        telemetry::get_subscriber("battlemon_backend".into(), "info".into(), std::io::stdout);
+    let subscriber = telemetry::get_subscriber("backend".into(), "info".into(), std::io::stdout);
     telemetry::init_subscriber(subscriber).context("Failed to init tracing subscriber")?;
     info!("Loading application config");
     let config = config::load_config().context("Failed to load app config")?;
