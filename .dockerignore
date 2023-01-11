@@ -2,3 +2,4 @@
 .idea
 .git
 .cargo
+postgres_data
