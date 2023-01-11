@@ -50,6 +50,56 @@
     },
     "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", created_at FROM nft_tokens WHERE id = $1\n        "
   },
+  "0bcb14cc2165109f1b5c271be256fe0044643bd47db9aa08765fcd2c940dea33": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "type",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "owner",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "url",
+          "ordinal": 3,
+          "type_info": "Text"
+        },
+        {
+          "name": "traits: Json<Vec<Trait>>",
+          "ordinal": 4,
+          "type_info": "Jsonb"
+        },
+        {
+          "name": "created_at",
+          "ordinal": 5,
+          "type_info": "Timestamptz"
+        }
+      ],
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "parameters": {
+        "Left": [
+          "Text"
+        ]
+      }
+    },
+    "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", created_at\n        FROM nft_tokens\n        WHERE $1::text IS null OR owner = $1\n        "
+  },
   "18504eb1ed644d167764aa49dbc30fdabf3639b0aa36dd0b4436634fff4edc77": {
     "describe": {
       "columns": [],
@@ -94,53 +144,5 @@
       }
     },
     "query": "DELETE FROM nft_tokens WHERE id = $1"
-  },
-  "bf65ea248b2b298ec112cf7fb7ef6be207b73e5b4dbc06fbdee7a33dfcf1941c": {
-    "describe": {
-      "columns": [
-        {
-          "name": "id",
-          "ordinal": 0,
-          "type_info": "Text"
-        },
-        {
-          "name": "type",
-          "ordinal": 1,
-          "type_info": "Text"
-        },
-        {
-          "name": "owner",
-          "ordinal": 2,
-          "type_info": "Text"
-        },
-        {
-          "name": "url",
-          "ordinal": 3,
-          "type_info": "Text"
-        },
-        {
-          "name": "traits: Json<Vec<Trait>>",
-          "ordinal": 4,
-          "type_info": "Jsonb"
-        },
-        {
-          "name": "created_at",
-          "ordinal": 5,
-          "type_info": "Timestamptz"
-        }
-      ],
-      "nullable": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      "parameters": {
-        "Left": []
-      }
-    },
-    "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", created_at FROM nft_tokens\n        "
   }
 }
