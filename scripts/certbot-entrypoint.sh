@@ -12,7 +12,7 @@ while true; do
     certbot certonly \
       --webroot \
       --webroot-path /tmp \
-      --domain api.battlemon.com \
+      --domain $DOMAIN \
       --non-interactive \
       --agree-tos \
       --email fedorovdanila@gmail.com \
