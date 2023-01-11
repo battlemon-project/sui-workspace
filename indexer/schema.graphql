@@ -32,7 +32,7 @@ input NftTokenInput {
 }
 
 type QueryRoot {
-	nftTokens: [NftToken!]!
+	nftTokens(owner: String): [NftToken!]!
 	nftToken(id: String!): NftToken!
 }
 
