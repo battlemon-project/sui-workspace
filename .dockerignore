@@ -3,3 +3,4 @@
 .git
 .cargo
 postgres_data
+.env

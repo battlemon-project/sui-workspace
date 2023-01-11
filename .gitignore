@@ -2,3 +2,4 @@
 target
 config
 postgres_data
+.env
