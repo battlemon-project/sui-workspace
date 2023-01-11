@@ -9,9 +9,9 @@ pub struct QueryRoot;
 
 #[Object]
 impl QueryRoot {
-    async fn nft_tokens(&self, ctx: &Context<'_>) -> Result<Vec<NftToken>> {
+    async fn nft_tokens(&self, ctx: &Context<'_>, owner: Option<String>) -> Result<Vec<NftToken>> {
         let pool = ctx.data_unchecked::<PgPool>();
-        let tokens = get_nft_tokens_db(pool)
+        let tokens = get_nft_tokens_db(pool, owner)
             .await
             .context("Failed to get nft tokens data from database")?;
 
@@ -29,12 +29,18 @@ impl QueryRoot {
 }
 
 #[tracing::instrument(name = "Query nft tokens from database", skip_all)]
-async fn get_nft_tokens_db(pool: &PgPool) -> StdResult<Vec<NftToken>, sqlx::Error> {
+async fn get_nft_tokens_db(
+    pool: &PgPool,
+    owner: Option<String>,
+) -> StdResult<Vec<NftToken>, sqlx::Error> {
     let ret = query_as!(
         NftTokenSql,
         r#"
-        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", created_at FROM nft_tokens
-        "#
+        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", created_at
+        FROM nft_tokens
+        WHERE $1::text IS null OR owner = $1
+        "#,
+        owner
     )
     .fetch_all(pool)
     .await?
