@@ -26,6 +26,7 @@ services:
       dockerfile: docker/certbot.Dockerfile
     environment:
       - CERTBOT_RENEW=true
+      - DOMAIN=api.battlemon.com
     volumes:
       - certbot_letsencrypt:/etc/letsencrypt/
       - certbot_acme:/tmp/.well-known/acme-challenge
