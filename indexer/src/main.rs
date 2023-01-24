@@ -1,20 +1,20 @@
-mod config;
-mod startup;
-mod telemetry;
-
 use anyhow::{Context, Result};
 use chrono::{DateTime as ChronoDateTime, Utc};
 use futures::StreamExt;
 use graphql_client::{GraphQLQuery, Response};
-use models::sui_sdk::error::SuiRpcResult;
-use models::sui_sdk::{
-    rpc_types::{SuiEvent, SuiEventFilter, SuiMoveStruct, SuiMoveValue},
-    types::base_types::ObjectID,
-    SuiClient,
-};
-use models::{NftToken, Trait};
 use reqwest::header;
 use tracing::info;
+
+use models::{NftToken, Trait};
+use models::sui_sdk::{
+    rpc_types::SuiEventFilter,
+    SuiClient,
+    types::base_types::ObjectID,
+};
+
+mod config;
+mod startup;
+mod telemetry;
 
 type DateTime = ChronoDateTime<Utc>;
 
