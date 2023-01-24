@@ -126,7 +126,7 @@ impl TryFrom<SuiEvent> for NftToken {
             owner: sender.to_string(),
             url: url.to_owned(),
             traits: ret_traits,
-            created_at: chrono::Utc::now(),
+            created_at: Utc::now(),
         })
     }
 }
