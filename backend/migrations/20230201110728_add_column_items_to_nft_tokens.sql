@@ -1,2 +1,2 @@
 ALTER TABLE nft_tokens
-    ADD COLUMN item JSONB NOT NULL;
+    ADD COLUMN items JSONB NOT NULL;
