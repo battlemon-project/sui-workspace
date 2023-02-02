@@ -9,7 +9,7 @@ fn main() {
     let schema = Schema::build(QueryRoot, MutationRoot, EmptySubscription).finish();
     let path = std::env::current_dir()
         .expect("Failed to determine the current directory")
-        .join("schema.graphql");
+        .join("graphql/schema.graphql");
 
     let mut file = File::create(path).expect("Failed to create file.");
     file.write_all(schema.sdl().as_bytes())

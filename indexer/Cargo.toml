@@ -25,7 +25,7 @@ config = { workspace = true }
 # battlemon models
 models = { path = "../models" }
 # graphql
-graphql_client = "0.11.0"
+graphql_client = "0.12.0"
 # time
 chrono = { workspace = true }
 
