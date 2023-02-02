@@ -1,7 +1,9 @@
 use anyhow::{Context, Result};
 use futures::StreamExt;
 use indexer::{config, handle_contract_event, telemetry};
-use models::sui_sdk::{rpc_types::SuiEventFilter, types::base_types::ObjectID, SuiClient};
+use models::sui_sdk::{
+    rpc_types::SuiEventFilter, types::base_types::ObjectID, SuiClient, SuiClientBuilder,
+};
 use tracing::{error, info};
 
 #[tokio::main]
@@ -12,13 +14,11 @@ async fn main() -> Result<()> {
     let config = config::load_config().context("Failed to load app config")?;
     info!("Parsing cli arguments");
     info!("Setup Sui Rust SDK");
-    let sui = SuiClient::new(
-        config.sui_json_rpc.http_url.as_str(),
-        Some(config.sui_json_rpc.ws_url.as_str()),
-        None,
-    )
-    .await
-    .context("Failed to create SuiClient")?;
+    let sui = SuiClientBuilder::default()
+        .ws_url(config.sui_json_rpc.ws_url)
+        .build(config.sui_json_rpc.http_url)
+        .await
+        .context("Failed to build SuiClient")?;
 
     let contract = config.sui_contract.address.as_str();
     let event_filter = SuiEventFilter::Package(ObjectID::from_hex_literal(contract)?);
