@@ -6,12 +6,8 @@ mutation InsertNft($id: String!, $type: String!, $owner: String!, $url: String!,
             owner: $owner
             url: $url
             traits: $traits
-            items: $traits
+            items: $items
             createdAt: $created_at
         }
     )
-}
-
-mutation AddItem($lemon_id: String!, $item_id: String!) {
-    addItem(lemon_id: $lemon_id, item_id: $item_id)
 }
