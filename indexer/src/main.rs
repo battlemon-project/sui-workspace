@@ -1,9 +1,7 @@
-use anyhow::{Context, Result};
+use eyre::{Context, Result};
 use futures::StreamExt;
 use indexer::{config, handle_contract_event, telemetry};
-use models::sui_sdk::{
-    rpc_types::SuiEventFilter, types::base_types::ObjectID, SuiClient, SuiClientBuilder,
-};
+use models::sui_sdk::{rpc_types::SuiEventFilter, types::base_types::ObjectID, SuiClientBuilder};
 use tracing::{error, info};
 
 #[tokio::main]
@@ -12,11 +10,10 @@ async fn main() -> Result<()> {
     telemetry::init_subscriber(subscriber).context("Failed to init tracing subscriber")?;
     info!("Loading application config");
     let config = config::load_config().context("Failed to load app config")?;
-    info!("Parsing cli arguments");
     info!("Setup Sui Rust SDK");
     let sui = SuiClientBuilder::default()
-        .ws_url(config.sui_json_rpc.ws_url)
-        .build(config.sui_json_rpc.http_url)
+        .ws_url(&config.sui_json_rpc.ws_url)
+        .build(&config.sui_json_rpc.http_url)
         .await
         .context("Failed to build SuiClient")?;
 
@@ -32,7 +29,7 @@ async fn main() -> Result<()> {
     loop {
         let contract_event = contract_events.next().await;
         if let Err(e) = handle_contract_event(contract_event, &config).await {
-            error!("While handling contract events obtain error: {e}");
+            error!("While handling contract events obtain error: {e:?}");
         }
     }
 }
