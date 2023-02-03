@@ -22,7 +22,10 @@ RUN cargo chef prepare --recipe-path recipe.json
 
 FROM chef AS  builder
 WORKDIR /app
-ENV SQLX_OFFLINE=true
+ENV SQLX_OFFLINE=true \
+    CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse \
+    CARGO_NET_GIT_FETCH_WITH_CLI=true
+
 COPY --from=planner /app/recipe.json recipe.json
 RUN cargo +nightly chef cook --release --recipe-path recipe.json
 COPY . .
