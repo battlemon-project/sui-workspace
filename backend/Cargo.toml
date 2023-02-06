@@ -14,7 +14,7 @@ name = "backend"
 # async runtime
 tokio = { workspace = true }
 # server
-axum = { version = "0.6.1", features = ["http2", "ws", "macros"] }
+axum = { version = "0.6.4", features = ["http2", "ws", "macros"] }
 hyper = { version = "0.14.23", features = ["server"] }
 # error handling
 anyhow = { workspace = true }
@@ -28,6 +28,7 @@ tracing-log = { workspace = true }
 serde = { workspace = true }
 # graphql
 async-graphql = { workspace = true }
+async-graphql-axum = "5.0.5"
 # database
 sqlx = { version = "0.6.2", default-features = false, features = ["runtime-tokio-rustls", "macros", "postgres", "chrono", "migrate", "offline", "decimal", "json"] }
 # configuration
