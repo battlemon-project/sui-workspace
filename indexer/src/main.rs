@@ -26,10 +26,11 @@ async fn main() -> Result<()> {
         .context("Failed to subscribe to events")?;
 
     info!("Start to poll Sui Node");
-    loop {
-        let contract_event = contract_events.next().await;
+    while let Some(contract_event) = contract_events.next().await {
         if let Err(e) = handle_contract_event(contract_event, &config).await {
             error!("While handling contract events obtain error: {e:?}");
         }
     }
+
+    panic!("Failed to get new events from Sui Node");
 }

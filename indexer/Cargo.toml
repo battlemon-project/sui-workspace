@@ -10,8 +10,7 @@ futures = { workspace = true }
 # http
 reqwest = { version = "0.11.13", features = ["json"] }
 # error handling
-anyhow = { workspace = true }
-thiserror = { workspace = true }
+eyre = { workspace = true }
 # logging
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
@@ -25,7 +24,7 @@ config = { workspace = true }
 # battlemon models
 models = { path = "../models" }
 # graphql
-graphql_client = "0.12.0"
+cynic = { version = "2.2.4", features = ["reqwest"] }
 # time
 chrono = { workspace = true }
 
