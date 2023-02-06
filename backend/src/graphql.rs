@@ -144,9 +144,10 @@ async fn remove_item_db(
     query!(
         r#"
         UPDATE nfts
-        SET items = (SELECT jsonb_agg(elements)::jsonb 
+        SET items = COALESCE((SELECT jsonb_agg(elements)::jsonb 
                         FROM jsonb_array_elements(items) elements
-                        WHERE elements->> 'id' != $1)
+                        WHERE elements->> 'id' != $1),
+                        '[]'::jsonb)
         WHERE id = $2
         "#,
         item_id,
