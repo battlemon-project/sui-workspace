@@ -44,27 +44,33 @@ impl TryFrom<SuiEvent> for Event {
 }
 
 fn parse_event_item_added(mut fields: BTreeMap<String, SuiMoveValue>) -> Result<Event, Error> {
-    let Some(SuiMoveValue::String(lemon_id)) = fields.remove(LEMON_ID) else {
+    let Some(SuiMoveValue::Address(lemon_id)) = fields.remove(LEMON_ID) else {
         return Err(Error::WrongEventFieldName(LEMON_ID.to_string()))
     };
 
-    let Some(SuiMoveValue::String(item_id)) = fields.remove(ITEM_ID) else {
+    let Some(SuiMoveValue::Address(item_id)) = fields.remove(ITEM_ID) else {
         return Err(Error::WrongEventFieldName(ITEM_ID.to_string()))
     };
 
-    Ok(Event::ItemAdded(Item { lemon_id, item_id }))
+    Ok(Event::ItemAdded(Item {
+        lemon_id: lemon_id.to_string(),
+        item_id: item_id.to_string(),
+    }))
 }
 
 fn parse_event_item_removed(mut fields: BTreeMap<String, SuiMoveValue>) -> Result<Event, Error> {
-    let Some(SuiMoveValue::String(lemon_id)) = fields.remove(LEMON_ID) else {
+    let Some(SuiMoveValue::Address(lemon_id)) = fields.remove(LEMON_ID) else {
         return Err(Error::WrongEventFieldName(LEMON_ID.to_string()))
     };
 
-    let Some(SuiMoveValue::String(item_id)) = fields.remove(ITEM_ID) else {
+    let Some(SuiMoveValue::Address(item_id)) = fields.remove(ITEM_ID) else {
         return Err(Error::WrongEventFieldName(ITEM_ID.to_string()))
     };
 
-    Ok(Event::ItemRemoved(Item { lemon_id, item_id }))
+    Ok(Event::ItemRemoved(Item {
+        lemon_id: lemon_id.to_string(),
+        item_id: item_id.to_string(),
+    }))
 }
 
 fn parse_event_nft_created(
