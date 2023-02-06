@@ -8,6 +8,6 @@ pub enum Error {
     EventTypeSplit,
     #[error("The event type with name `{0}` is unsupported")]
     UnsupportedEventType(String),
-    #[error("The field with name `{0}` doesn't exist")]
+    #[error("The event's field with name `{0}` doesn't exist")]
     WrongEventFieldName(String),
 }
