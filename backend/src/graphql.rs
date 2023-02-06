@@ -3,7 +3,6 @@ use async_graphql::{Context, Object};
 use models::{Nft, NftSql, Trait};
 use sqlx::{query, query_as, types::Json, PgPool, Postgres, Transaction};
 use std::result::Result as StdResult;
-use tracing::error;
 
 pub struct QueryRoot;
 
@@ -42,7 +41,7 @@ async fn get_nfts_db(
     let ret = query_as!(
         NftSql,
         r#"
-        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", items as "items: Json<Vec<Trait>>", created_at
+        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", items as "items: Json<Vec<NftSql>>", created_at
         FROM nfts
         WHERE ($1::text IS null OR owner = $1)
             AND ($2::text IS null OR type = $2)
@@ -64,7 +63,9 @@ async fn get_nft_db(id: String, pool: &PgPool) -> StdResult<Nft, sqlx::Error> {
     query_as!(
         NftSql,
         r#"
-        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>, items as "items: Json<Vec<Trait>>", created_at FROM nfts WHERE id = $1
+        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", items as "items: Json<Vec<NftSql>>", created_at
+        FROM nfts 
+        WHERE id = $1
         "#,
         id
     )
@@ -72,12 +73,13 @@ async fn get_nft_db(id: String, pool: &PgPool) -> StdResult<Nft, sqlx::Error> {
     .await
     .map(Into::into)
 }
-
+#[derive(Debug)]
 pub struct MutationRoot;
 
 #[Object]
 impl MutationRoot {
-    async fn insert_nft(&self, ctx: &Context<'_>, nft: Nft) -> Result<Nft> {
+    #[tracing::instrument(name = "Mutation starting. Inserting NFT", skip(ctx))]
+    async fn insert_nft(&self, ctx: &Context<'_>, nft: Nft) -> Result<bool> {
         let nft = nft.into();
         let pool = ctx.data_unchecked::<PgPool>();
         let mut tx = pool
@@ -91,8 +93,90 @@ impl MutationRoot {
             .await
             .context("Failed to commit SQL transaction to store new nft")?;
 
-        Ok(nft.into())
+        Ok(true)
     }
+
+    #[tracing::instrument(name = "Mutation starting. Adding Item to NFT", skip(ctx))]
+    async fn add_item(&self, ctx: &Context<'_>, lemon_id: String, item_id: String) -> Result<bool> {
+        let pool = ctx.data_unchecked::<PgPool>();
+        let mut tx = pool
+            .begin()
+            .await
+            .context("Failed to start SQL transaction")?;
+        add_item_db(&lemon_id, &item_id, &mut tx)
+            .await
+            .context("Failed to add item to lemon in database")?;
+        tx.commit()
+            .await
+            .context("Failed to commit SQL transaction to store new nft")?;
+
+        Ok(true)
+    }
+
+    #[tracing::instrument(name = "Mutation starting. Removing Item from NFT", skip(ctx))]
+    async fn remove_item(
+        &self,
+        ctx: &Context<'_>,
+        lemon_id: String,
+        item_id: String,
+    ) -> Result<bool> {
+        let pool = ctx.data_unchecked::<PgPool>();
+        let mut tx = pool
+            .begin()
+            .await
+            .context("Failed to start SQL transaction")?;
+        remove_item_db(&lemon_id, &item_id, &mut tx)
+            .await
+            .context("Failed to add item to lemon in database")?;
+        tx.commit()
+            .await
+            .context("Failed to commit SQL transaction to store new nft")?;
+
+        Ok(true)
+    }
+}
+
+async fn remove_item_db(
+    lemon_id: &str,
+    item_id: &str,
+    tx: &mut Transaction<'_, Postgres>,
+) -> StdResult<(), sqlx::Error> {
+    query!(
+        r#"
+        UPDATE nfts
+        SET items = (SELECT jsonb_agg(elements)::jsonb 
+                        FROM jsonb_array_elements(items) elements
+                        WHERE elements->> 'id' != $1)
+        WHERE id = $2
+        "#,
+        item_id,
+        lemon_id,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    Ok(())
+}
+
+#[tracing::instrument(name = "Add item to lemon in database", skip(tx))]
+async fn add_item_db(
+    lemon_id: &str,
+    item_id: &str,
+    tx: &mut Transaction<'_, Postgres>,
+) -> StdResult<(), sqlx::Error> {
+    query!(
+        r#"
+        UPDATE nfts
+        SET items = items || (SELECT to_jsonb(r) FROM nfts r WHERE id = $1)
+        WHERE id = $2
+        "#,
+        item_id,
+        lemon_id,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    Ok(())
 }
 
 #[tracing::instrument(name = "Insert nft to database", skip(tx))]
@@ -123,11 +207,7 @@ async fn insert_nft_db(
         items as _,
     )
     .execute(&mut *tx)
-    .await
-    .map_err(|e| {
-        error!("Failed to insert nft to database: {e:?}");
-        e
-    })?;
+    .await?;
 
     Ok(())
 }
