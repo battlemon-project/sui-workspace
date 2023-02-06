@@ -7,7 +7,8 @@ edition = "2021"
 # graphql sever
 async-graphql = { workspace = true }
 # error handling
-anyhow = { workspace = true }
+eyre = { workspace = true }
+thiserror = { workspace = true }
 # serialization
 serde = { workspace = true }
 serde_json = { workspace = true }
@@ -16,4 +17,4 @@ chrono = { workspace = true }
 # database
 sqlx-core = { version = "0.6.2", features = ["json", "runtime-tokio-rustls"] }
 # sui json-rpc
-sui-sdk = { git = "https://github.com/MystenLabs/sui", rev = "cece992" }
+sui-sdk = { git = "https://github.com/MystenLabs/sui", rev = "f911c73" }
