@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Context, Result};
+use eyre::{anyhow, Context, Result};
 use serde::Deserialize;
 use std::str::FromStr;
 
@@ -75,7 +75,7 @@ impl Environment {
 }
 
 impl FromStr for Environment {
-    type Err = anyhow::Error;
+    type Err = eyre::Error;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
         match s {
