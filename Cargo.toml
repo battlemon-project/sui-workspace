@@ -8,6 +8,7 @@ tokio = { version = "1.17.0", features = ["macros", "rt-multi-thread"] }
 futures = "0.3.25"
 # error handling
 anyhow = "1.0.68"
+eyre = "0.6.8"
 thiserror = "1.0.38"
 # logging
 tracing = "0.1.37"

@@ -1,122 +1,6 @@
 {
   "db": "PostgreSQL",
-  "0814bc17eadb9bcebf07a0cc175f7246bdfc4b9b08bb9ee71425cd1660ecefd1": {
-    "describe": {
-      "columns": [
-        {
-          "name": "id",
-          "ordinal": 0,
-          "type_info": "Text"
-        },
-        {
-          "name": "type",
-          "ordinal": 1,
-          "type_info": "Text"
-        },
-        {
-          "name": "owner",
-          "ordinal": 2,
-          "type_info": "Text"
-        },
-        {
-          "name": "url",
-          "ordinal": 3,
-          "type_info": "Text"
-        },
-        {
-          "name": "traits: Json<Vec<Trait>>",
-          "ordinal": 4,
-          "type_info": "Jsonb"
-        },
-        {
-          "name": "created_at",
-          "ordinal": 5,
-          "type_info": "Timestamptz"
-        }
-      ],
-      "nullable": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      "parameters": {
-        "Left": [
-          "Text"
-        ]
-      }
-    },
-    "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", created_at FROM nft_tokens WHERE id = $1\n        "
-  },
-  "0bcb14cc2165109f1b5c271be256fe0044643bd47db9aa08765fcd2c940dea33": {
-    "describe": {
-      "columns": [
-        {
-          "name": "id",
-          "ordinal": 0,
-          "type_info": "Text"
-        },
-        {
-          "name": "type",
-          "ordinal": 1,
-          "type_info": "Text"
-        },
-        {
-          "name": "owner",
-          "ordinal": 2,
-          "type_info": "Text"
-        },
-        {
-          "name": "url",
-          "ordinal": 3,
-          "type_info": "Text"
-        },
-        {
-          "name": "traits: Json<Vec<Trait>>",
-          "ordinal": 4,
-          "type_info": "Jsonb"
-        },
-        {
-          "name": "created_at",
-          "ordinal": 5,
-          "type_info": "Timestamptz"
-        }
-      ],
-      "nullable": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      "parameters": {
-        "Left": [
-          "Text"
-        ]
-      }
-    },
-    "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", created_at\n        FROM nft_tokens\n        WHERE $1::text IS null OR owner = $1\n        "
-  },
-  "18504eb1ed644d167764aa49dbc30fdabf3639b0aa36dd0b4436634fff4edc77": {
-    "describe": {
-      "columns": [],
-      "nullable": [],
-      "parameters": {
-        "Left": [
-          "Text",
-          "Text",
-          "Text",
-          "Text",
-          "Jsonb"
-        ]
-      }
-    },
-    "query": "\n        UPDATE nft_tokens\n        SET type = $2, owner = $3, url = $4, traits = $5\n        WHERE id = $1\n        "
-  },
-  "50a028f3fefbd48206f7d3c904e6e9efca3616f141c7b4cc3a0450af752db281": {
+  "068fc6dc164dce27967b87b67d55a76c380fe866f086f21dc60c27f91feeb93e": {
     "describe": {
       "columns": [],
       "nullable": [],
@@ -127,13 +11,170 @@
           "Text",
           "Text",
           "Jsonb",
-          "Timestamptz"
+          "Timestamptz",
+          "Jsonb"
         ]
       }
     },
-    "query": "\n        INSERT INTO nft_tokens (id, type, owner, url, traits, created_at)\n        VALUES ($1, $2, $3, $4, $5, $6)\n        ON CONFLICT DO NOTHING \n        "
+    "query": "\n        INSERT INTO nfts (id, type, owner, url, traits, created_at, items)\n        VALUES ($1, $2, $3, $4, $5, $6, $7)\n        ON CONFLICT DO NOTHING \n        "
   },
-  "6a02dfc8d542868b54d92ea5f5fd5f6948b1e6e60d8d1f849ee06e677be56312": {
+  "1518d7ce90c8ad8b632e6ca140e4b05dc5fd081f3df850da077342659485fe7a": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "type",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "owner",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "url",
+          "ordinal": 3,
+          "type_info": "Text"
+        },
+        {
+          "name": "traits: Json<Vec<Trait>>",
+          "ordinal": 4,
+          "type_info": "Jsonb"
+        },
+        {
+          "name": "items: Json<Vec<NftSql>>",
+          "ordinal": 5,
+          "type_info": "Jsonb"
+        },
+        {
+          "name": "created_at",
+          "ordinal": 6,
+          "type_info": "Timestamptz"
+        }
+      ],
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "parameters": {
+        "Left": [
+          "Text"
+        ]
+      }
+    },
+    "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", items as \"items: Json<Vec<NftSql>>\", created_at\n        FROM nfts \n        WHERE id = $1\n        "
+  },
+  "3d0e711915d5e0dc4dd9d600951cd8bdbbae2367a033e77b98259db9f0f69835": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Text",
+          "Text",
+          "Text",
+          "Jsonb",
+          "Jsonb"
+        ]
+      }
+    },
+    "query": "\n        UPDATE nfts\n        SET type = $2, owner = $3, url = $4, traits = $5, items = $6\n        WHERE id = $1\n        "
+  },
+  "4fa8d20ddf8ee4d7bcd5c21d23e59e318a0faa4e6ada8f5d5bcdc737715b6a42": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Text"
+        ]
+      }
+    },
+    "query": "\n        UPDATE nfts\n        SET items = items || (SELECT to_jsonb(r) FROM nfts r WHERE id = $1)\n        WHERE id = $2\n        "
+  },
+  "6afd9a8424c813cf5b81ce33d099ca27f3f65ceda14f5c44ab104d52646cebc9": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Text"
+        ]
+      }
+    },
+    "query": "\n        UPDATE nfts\n        SET items = (SELECT jsonb_agg(elements)::jsonb \n                        FROM jsonb_array_elements(items) elements\n                        WHERE elements->> 'id' != $1)\n        WHERE id = $2\n        "
+  },
+  "c1862eb06705d64a1ac2d26f89b04df6325b5573d45bce4ddec9494b35a0fc4a": {
+    "describe": {
+      "columns": [
+        {
+          "name": "id",
+          "ordinal": 0,
+          "type_info": "Text"
+        },
+        {
+          "name": "type",
+          "ordinal": 1,
+          "type_info": "Text"
+        },
+        {
+          "name": "owner",
+          "ordinal": 2,
+          "type_info": "Text"
+        },
+        {
+          "name": "url",
+          "ordinal": 3,
+          "type_info": "Text"
+        },
+        {
+          "name": "traits: Json<Vec<Trait>>",
+          "ordinal": 4,
+          "type_info": "Jsonb"
+        },
+        {
+          "name": "items: Json<Vec<NftSql>>",
+          "ordinal": 5,
+          "type_info": "Jsonb"
+        },
+        {
+          "name": "created_at",
+          "ordinal": 6,
+          "type_info": "Timestamptz"
+        }
+      ],
+      "nullable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Text"
+        ]
+      }
+    },
+    "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", items as \"items: Json<Vec<NftSql>>\", created_at\n        FROM nfts\n        WHERE ($1::text IS null OR owner = $1)\n            AND ($2::text IS null OR type = $2)\n        "
+  },
+  "ec7b4505560081638473f7fdc596bb83f8498d38976d4aa2c5d58c5a0efb5695": {
     "describe": {
       "columns": [],
       "nullable": [],
@@ -143,6 +184,6 @@
         ]
       }
     },
-    "query": "DELETE FROM nft_tokens WHERE id = $1"
+    "query": "DELETE FROM nfts WHERE id = $1"
   }
 }
