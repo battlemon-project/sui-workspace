@@ -10,16 +10,15 @@ while true; do
   else
     echo "Getting new certificate"
     certbot certonly \
-      --webroot \
-      --webroot-path /tmp \
-      --domain $DOMAIN \
       --non-interactive \
+      --standalone \
+      --preferred-challenges=http \
+      --domain $DOMAIN \
       --agree-tos \
       --email fedorovdanila@gmail.com \
       --rsa-key-size 4096 \
       --verbose \
-      --keep-until-expiring \
-      --preferred-challenges=http &&
+      --keep-until-expiring &&
       export CERTBOT_RENEW=true
   fi
 
