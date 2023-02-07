@@ -104,19 +104,6 @@
     },
     "query": "\n        UPDATE nfts\n        SET items = items || (SELECT to_jsonb(r) FROM nfts r WHERE id = $1)\n        WHERE id = $2\n        "
   },
-  "6afd9a8424c813cf5b81ce33d099ca27f3f65ceda14f5c44ab104d52646cebc9": {
-    "describe": {
-      "columns": [],
-      "nullable": [],
-      "parameters": {
-        "Left": [
-          "Text",
-          "Text"
-        ]
-      }
-    },
-    "query": "\n        UPDATE nfts\n        SET items = (SELECT jsonb_agg(elements)::jsonb \n                        FROM jsonb_array_elements(items) elements\n                        WHERE elements->> 'id' != $1)\n        WHERE id = $2\n        "
-  },
   "c1862eb06705d64a1ac2d26f89b04df6325b5573d45bce4ddec9494b35a0fc4a": {
     "describe": {
       "columns": [
@@ -173,6 +160,19 @@
       }
     },
     "query": "\n        SELECT id, type, owner, url, traits as \"traits: Json<Vec<Trait>>\", items as \"items: Json<Vec<NftSql>>\", created_at\n        FROM nfts\n        WHERE ($1::text IS null OR owner = $1)\n            AND ($2::text IS null OR type = $2)\n        "
+  },
+  "df43712df151332efb18f9755f0772ecb85c2fdf2121edf496a34df0b8b7b3db": {
+    "describe": {
+      "columns": [],
+      "nullable": [],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Text"
+        ]
+      }
+    },
+    "query": "\n        UPDATE nfts\n        SET items = COALESCE((SELECT jsonb_agg(elements)\n                        FROM jsonb_array_elements(items) elements\n                        WHERE elements->> 'id' != $1),\n                        '[]'::jsonb)\n        WHERE id = $2\n        "
   },
   "ec7b4505560081638473f7fdc596bb83f8498d38976d4aa2c5d58c5a0efb5695": {
     "describe": {
