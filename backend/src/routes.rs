@@ -1,6 +1,8 @@
 use crate::config::Config;
 use crate::graphql::{MutationRoot, QueryRoot};
 use async_graphql::{EmptySubscription, Schema};
+use tower_http::cors::CorsLayer;
+
 use axum::{
     extract::FromRef,
     routing::{get, post},
@@ -30,4 +32,5 @@ pub fn setup_router(state: AppState) -> Router {
         .route("/graphql", post(graphql_handler))
         .route("/graphql/playground",get(graphql_playground).post(graphql_handler))
         .with_state(state)
+        .layer(CorsLayer::permissive())
 }

@@ -814,6 +814,7 @@ dependencies = [
  "sqlx 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "tokio",
+ "tower-http",
  "tracing",
  "tracing-bunyan-formatter",
  "tracing-log",
