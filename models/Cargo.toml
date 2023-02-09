@@ -17,4 +17,4 @@ chrono = { workspace = true }
 # database
 sqlx-core = { version = "0.6.2", features = ["json", "runtime-tokio-rustls"] }
 # sui json-rpc
-sui-sdk = { git = "https://github.com/MystenLabs/sui", rev = "f911c73" }
+sui-sdk = { git = "https://github.com/MystenLabs/sui", rev = "5d3ff6b" }
