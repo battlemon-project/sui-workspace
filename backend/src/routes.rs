@@ -32,5 +32,5 @@ pub fn setup_router(state: AppState) -> Router {
         .route("/graphql", post(graphql_handler))
         .route("/graphql/playground",get(graphql_playground).post(graphql_handler))
         .with_state(state)
-        .layer(CorsLayer::permissive())
+        .layer(CorsLayer::new().allow_origin(tower_http::cors::Any))
 }
