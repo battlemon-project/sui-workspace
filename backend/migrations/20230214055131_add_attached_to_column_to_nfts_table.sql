@@ -1,0 +1,2 @@
+ALTER TABLE nfts
+    ADD COLUMN attached_to TEXT DEFAULT NULL;
