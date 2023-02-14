@@ -1,5 +1,5 @@
-pub mod events;
 pub mod errors;
+pub mod events;
 
 use async_graphql::{InputObject, SimpleObject};
 use chrono::{DateTime, Utc};
@@ -24,6 +24,7 @@ pub struct Nft {
     pub traits: Vec<Trait>,
     pub items: Vec<Nft>,
     pub created_at: DateTime<Utc>,
+    pub attached_to: Option<String>,
 }
 
 #[derive(SimpleObject, Serialize, Deserialize, Debug, Clone)]
@@ -41,6 +42,7 @@ pub struct NftSql {
     pub traits: Json<Vec<Trait>>,
     pub items: Json<Vec<NftSql>>,
     pub created_at: DateTime<Utc>,
+    pub attached_to: Option<String>,
 }
 
 impl From<Nft> for NftSql {
@@ -53,6 +55,7 @@ impl From<Nft> for NftSql {
             traits,
             items,
             created_at,
+            attached_to,
         }: Nft,
     ) -> Self {
         let items = items.into_iter().map(Into::into).collect();
@@ -64,6 +67,7 @@ impl From<Nft> for NftSql {
             traits: Json(traits),
             items: Json(items),
             created_at,
+            attached_to,
         }
     }
 }
@@ -78,6 +82,7 @@ impl From<NftSql> for Nft {
             traits,
             items,
             created_at,
+            attached_to,
         }: NftSql,
     ) -> Self {
         let items = items.0.into_iter().map(Into::into).collect();
@@ -89,6 +94,7 @@ impl From<NftSql> for Nft {
             traits: traits.0,
             items,
             created_at,
+            attached_to,
         }
     }
 }
