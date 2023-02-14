@@ -113,5 +113,6 @@ fn parse_event_nft_created(
         traits: ret_traits,
         items: Vec::new(),
         created_at: Utc::now(),
+        attached_to: None,
     }))
 }
