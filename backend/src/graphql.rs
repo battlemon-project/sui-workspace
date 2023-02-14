@@ -164,12 +164,22 @@ async fn remove_item_db(
             items = COALESCE((SELECT jsonb_agg(elements)
                         FROM jsonb_array_elements(items) elements
                         WHERE elements->> 'id' != $1),
-                        '[]'::jsonb),
-            attached_to = NULL
+                        '[]'::jsonb)
         WHERE id = $2
         "#,
         item_id,
         lemon_id,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    query!(
+        r#"
+        UPDATE nfts
+        SET attached_to = NULL
+        WHERE id = $1
+        "#,
+        item_id,
     )
     .execute(&mut *tx)
     .await?;
