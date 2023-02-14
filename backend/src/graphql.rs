@@ -41,7 +41,15 @@ async fn get_nfts_db(
     let ret = query_as!(
         NftSql,
         r#"
-        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", items as "items: Json<Vec<NftSql>>", created_at
+        SELECT 
+            id,
+            type,
+            owner,
+            url,
+            traits as "traits: Json<Vec<Trait>>",
+            items as "items: Json<Vec<NftSql>>",
+            created_at,
+            attached_to,
         FROM nfts
         WHERE ($1::text IS null OR owner = $1)
             AND ($2::text IS null OR type = $2)
@@ -63,7 +71,15 @@ async fn get_nft_db(id: String, pool: &PgPool) -> StdResult<Nft, sqlx::Error> {
     query_as!(
         NftSql,
         r#"
-        SELECT id, type, owner, url, traits as "traits: Json<Vec<Trait>>", items as "items: Json<Vec<NftSql>>", created_at
+        SELECT 
+            id,
+            type,
+            owner, 
+            url, 
+            traits as "traits: Json<Vec<Trait>>", 
+            items as "items: Json<Vec<NftSql>>", 
+            created_at,
+            attached_to,
         FROM nfts 
         WHERE id = $1
         "#,
@@ -144,10 +160,12 @@ async fn remove_item_db(
     query!(
         r#"
         UPDATE nfts
-        SET items = COALESCE((SELECT jsonb_agg(elements)
+        SET 
+            items = COALESCE((SELECT jsonb_agg(elements)
                         FROM jsonb_array_elements(items) elements
                         WHERE elements->> 'id' != $1),
-                        '[]'::jsonb)
+                        '[]'::jsonb),
+            attached_to = NULL
         WHERE id = $2
         "#,
         item_id,
@@ -169,7 +187,11 @@ async fn add_item_db(
         r#"
         UPDATE nfts
         SET items = items || (SELECT to_jsonb(r) FROM nfts r WHERE id = $1)
-        WHERE id = $2
+        WHERE id = $2;
+        
+        UPDATE nfts
+        SET attached_to = $2
+        WHERE id = $1
         "#,
         item_id,
         lemon_id,
@@ -190,13 +212,14 @@ async fn insert_nft_db(
         traits,
         items,
         created_at,
+        attached_to,
     }: &NftSql,
     tx: &mut Transaction<'_, Postgres>,
 ) -> StdResult<(), sqlx::Error> {
     query!(
         r#"
-        INSERT INTO nfts (id, type, owner, url, traits, created_at, items)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO nfts (id, type, owner, url, traits, created_at, items, attached_to)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         ON CONFLICT DO NOTHING 
         "#,
         id,
@@ -206,6 +229,7 @@ async fn insert_nft_db(
         traits as _,
         created_at,
         items as _,
+        attached_to,
     )
     .execute(&mut *tx)
     .await?;
@@ -223,13 +247,14 @@ async fn update_nft_db(
         traits,
         items,
         created_at,
+        attached_to,
     }: &NftSql,
     tx: &mut Transaction<'_, Postgres>,
 ) -> StdResult<(), sqlx::Error> {
     query!(
         r#"
         UPDATE nfts
-        SET type = $2, owner = $3, url = $4, traits = $5, items = $6
+        SET type = $2, owner = $3, url = $4, traits = $5, items = $6, attached_to = $7,
         WHERE id = $1
         "#,
         id,
@@ -238,6 +263,7 @@ async fn update_nft_db(
         url,
         traits as _,
         items as _,
+        attached_to,
     )
     .execute(&mut *tx)
     .await?;
