@@ -19,13 +19,14 @@ pub mod insert_nft {
     )]
     pub struct InsertNftMutation {
         #[arguments(nft : {
-        id: $id,
-        type: $r#type,
-        owner: $owner,
-        url: $url,
-        createdAt: $created_at,
-        traits: $traits,
-        items: $items,
+            id: $id,
+            type: $r#type,
+            owner: $owner,
+            url: $url,
+            createdAt: $created_at,
+            traits: $traits,
+            items: $items,
+            attachedTo: $attached_to,
         })]
         pub insert_nft: bool,
     }
@@ -40,6 +41,7 @@ pub mod insert_nft {
         pub traits: Vec<TraitInput>,
         pub items: Vec<NftInput>,
         pub created_at: DateTime,
+        pub attached_to: Option<String>,
     }
 
     #[derive(cynic::InputObject, Debug)]
@@ -52,6 +54,7 @@ pub mod insert_nft {
         pub traits: Vec<TraitInput>,
         pub items: Vec<NftInput>,
         pub created_at: DateTime,
+        pub attached_to: Option<String>,
     }
 
     #[derive(cynic::InputObject, Debug)]
@@ -115,6 +118,7 @@ impl From<Nft> for insert_nft::NftInput {
             traits,
             items,
             created_at,
+            attached_to,
         }: Nft,
     ) -> Self {
         Self {
@@ -125,6 +129,7 @@ impl From<Nft> for insert_nft::NftInput {
             traits: traits.into_iter().map(Into::into).collect(),
             items: items.into_iter().map(Into::into).collect(),
             created_at,
+            attached_to,
         }
     }
 }

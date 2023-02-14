@@ -80,6 +80,7 @@ fn build_query(event: Event) -> Value {
             traits,
             items,
             created_at,
+            attached_to,
         }) => {
             let args = InsertNftMutationArguments {
                 id,
@@ -89,6 +90,7 @@ fn build_query(event: Event) -> Value {
                 traits: traits.into_iter().map(Into::into).collect(),
                 items: items.into_iter().map(Into::into).collect(),
                 created_at,
+                attached_to,
             };
             let query = InsertNftMutation::build(args);
             serde_json::to_value(query).unwrap()

@@ -49,7 +49,7 @@ async fn get_nfts_db(
             traits as "traits: Json<Vec<Trait>>",
             items as "items: Json<Vec<NftSql>>",
             created_at,
-            attached_to,
+            attached_to
         FROM nfts
         WHERE ($1::text IS null OR owner = $1)
             AND ($2::text IS null OR type = $2)
@@ -79,7 +79,7 @@ async fn get_nft_db(id: String, pool: &PgPool) -> StdResult<Nft, sqlx::Error> {
             traits as "traits: Json<Vec<Trait>>", 
             items as "items: Json<Vec<NftSql>>", 
             created_at,
-            attached_to,
+            attached_to
         FROM nfts 
         WHERE id = $1
         "#,
@@ -188,7 +188,15 @@ async fn add_item_db(
         UPDATE nfts
         SET items = items || (SELECT to_jsonb(r) FROM nfts r WHERE id = $1)
         WHERE id = $2;
-        
+        "#,
+        item_id,
+        lemon_id,
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    query!(
+        r#"
         UPDATE nfts
         SET attached_to = $2
         WHERE id = $1
@@ -229,7 +237,7 @@ async fn insert_nft_db(
         traits as _,
         created_at,
         items as _,
-        attached_to,
+        attached_to as _,
     )
     .execute(&mut *tx)
     .await?;
@@ -254,7 +262,7 @@ async fn update_nft_db(
     query!(
         r#"
         UPDATE nfts
-        SET type = $2, owner = $3, url = $4, traits = $5, items = $6, attached_to = $7,
+        SET type = $2, owner = $3, url = $4, traits = $5, items = $6, attached_to = $7
         WHERE id = $1
         "#,
         id,
@@ -263,7 +271,7 @@ async fn update_nft_db(
         url,
         traits as _,
         items as _,
-        attached_to,
+        attached_to as _,
     )
     .execute(&mut *tx)
     .await?;
