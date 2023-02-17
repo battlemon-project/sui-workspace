@@ -127,7 +127,7 @@ dependencies = [
 [[package]]
 name = "anemo"
 version = "0.0.0"
-source = "git+https://github.com/mystenlabs/anemo.git?rev=0e0ef7054082a6f5a8921688e3d568761bc3be21#0e0ef7054082a6f5a8921688e3d568761bc3be21"
+source = "git+https://github.com/mystenlabs/anemo.git?rev=d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff#d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -159,7 +159,7 @@ dependencies = [
 [[package]]
 name = "anemo-build"
 version = "0.0.0"
-source = "git+https://github.com/mystenlabs/anemo.git?rev=0e0ef7054082a6f5a8921688e3d568761bc3be21#0e0ef7054082a6f5a8921688e3d568761bc3be21"
+source = "git+https://github.com/mystenlabs/anemo.git?rev=d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff#d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff"
 dependencies = [
  "prettyplease",
  "proc-macro2 1.0.51",
@@ -168,9 +168,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "anemo-cli"
+version = "0.0.0"
+source = "git+https://github.com/mystenlabs/anemo.git?rev=d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff#d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff"
+dependencies = [
+ "anemo",
+ "anemo-tower",
+ "bytes",
+ "clap 4.1.6",
+ "dashmap",
+ "rand 0.8.5",
+ "tokio",
+ "tower",
+ "tracing",
+]
+
+[[package]]
 name = "anemo-tower"
 version = "0.0.0"
-source = "git+https://github.com/mystenlabs/anemo.git?rev=0e0ef7054082a6f5a8921688e3d568761bc3be21#0e0ef7054082a6f5a8921688e3d568761bc3be21"
+source = "git+https://github.com/mystenlabs/anemo.git?rev=d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff#d4017b6cefad7ebc5e84b5c6b8eeff4668f719ff"
 dependencies = [
  "anemo",
  "bytes",
@@ -1273,7 +1289,7 @@ dependencies = [
 [[package]]
 name = "bytecode-interpreter-crypto"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "curve25519-dalek-fiat",
@@ -1510,13 +1526,28 @@ checksum = "71655c45cb9845d3270c9d6df84ebe72b4dad3c2ba3f7023ad47c144e4e473a5"
 dependencies = [
  "atty",
  "bitflags",
- "clap_derive",
- "clap_lex",
+ "clap_derive 3.2.18",
+ "clap_lex 0.2.4",
  "indexmap",
  "once_cell",
  "strsim 0.10.0",
  "termcolor",
  "textwrap 0.16.0",
+]
+
+[[package]]
+name = "clap"
+version = "4.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec0b0588d44d4d63a87dbd75c136c166bbfd9a86a31cb89e09906521c7d3f5e3"
+dependencies = [
+ "bitflags",
+ "clap_derive 4.1.0",
+ "clap_lex 0.3.1",
+ "is-terminal",
+ "once_cell",
+ "strsim 0.10.0",
+ "termcolor",
 ]
 
 [[package]]
@@ -1533,10 +1564,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "clap_derive"
+version = "4.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "684a277d672e91966334af371f1a7b5833f9aa00b07c84e92fbce95e00208ce8"
+dependencies = [
+ "heck 0.4.1",
+ "proc-macro-error",
+ "proc-macro2 1.0.51",
+ "quote 1.0.23",
+ "syn 1.0.107",
+]
+
+[[package]]
 name = "clap_lex"
 version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2850f2f5a82cbf437dd5af4d49848fbdfc27c157c3d010345776f952765261c5"
+dependencies = [
+ "os_str_bytes",
+]
+
+[[package]]
+name = "clap_lex"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "783fe232adfca04f90f56201b26d79682d4cd2625e0bc7290b95123afe558ade"
 dependencies = [
  "os_str_bytes",
 ]
@@ -2905,7 +2958,7 @@ dependencies = [
 [[package]]
 name = "fastcrypto"
 version = "0.1.4"
-source = "git+https://github.com/MystenLabs/fastcrypto?rev=235211dc8195590f5353d38135f5ee51a267521e#235211dc8195590f5353d38135f5ee51a267521e"
+source = "git+https://github.com/MystenLabs/fastcrypto?rev=b2c77ad4aff173462a1270b4ce0be63ef37db06b#b2c77ad4aff173462a1270b4ce0be63ef37db06b"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -2953,7 +3006,7 @@ dependencies = [
 [[package]]
 name = "fastcrypto-derive"
 version = "0.1.2"
-source = "git+https://github.com/MystenLabs/fastcrypto?rev=235211dc8195590f5353d38135f5ee51a267521e#235211dc8195590f5353d38135f5ee51a267521e"
+source = "git+https://github.com/MystenLabs/fastcrypto?rev=b2c77ad4aff173462a1270b4ce0be63ef37db06b#b2c77ad4aff173462a1270b4ce0be63ef37db06b"
 dependencies = [
  "convert_case 0.6.0",
  "proc-macro2 1.0.51",
@@ -2964,7 +3017,7 @@ dependencies = [
 [[package]]
 name = "fastcrypto-tbls"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/fastcrypto?rev=235211dc8195590f5353d38135f5ee51a267521e#235211dc8195590f5353d38135f5ee51a267521e"
+source = "git+https://github.com/MystenLabs/fastcrypto?rev=b2c77ad4aff173462a1270b4ce0be63ef37db06b#b2c77ad4aff173462a1270b4ce0be63ef37db06b"
 dependencies = [
  "bincode",
  "digest 0.10.6",
@@ -2980,7 +3033,7 @@ dependencies = [
 [[package]]
 name = "fastcrypto-zkp"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/fastcrypto?rev=235211dc8195590f5353d38135f5ee51a267521e#235211dc8195590f5353d38135f5ee51a267521e"
+source = "git+https://github.com/MystenLabs/fastcrypto?rev=b2c77ad4aff173462a1270b4ce0be63ef37db06b#b2c77ad4aff173462a1270b4ce0be63ef37db06b"
 dependencies = [
  "ark-bls12-381",
  "ark-ec",
@@ -4757,7 +4810,7 @@ checksum = "1fafa6961cabd9c63bcd77a45d7e3b7f3b552b70417831fb0f56db717e72407e"
 [[package]]
 name = "move-abigen"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -4774,7 +4827,7 @@ dependencies = [
 [[package]]
 name = "move-binary-format"
 version = "0.0.3"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "move-core-types",
@@ -4787,12 +4840,12 @@ dependencies = [
 [[package]]
 name = "move-borrow-graph"
 version = "0.0.1"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 
 [[package]]
 name = "move-bytecode-source-map"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -4807,7 +4860,7 @@ dependencies = [
 [[package]]
 name = "move-bytecode-utils"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "move-binary-format",
@@ -4819,7 +4872,7 @@ dependencies = [
 [[package]]
 name = "move-bytecode-verifier"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "fail 0.4.0",
@@ -4832,7 +4885,7 @@ dependencies = [
 [[package]]
 name = "move-bytecode-viewer"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "clap 3.2.23",
@@ -4849,7 +4902,7 @@ dependencies = [
 [[package]]
 name = "move-cli"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -4895,7 +4948,7 @@ dependencies = [
 [[package]]
 name = "move-command-line-common"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "difference",
@@ -4912,7 +4965,7 @@ dependencies = [
 [[package]]
 name = "move-compiler"
 version = "0.0.1"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -4941,7 +4994,7 @@ dependencies = [
 [[package]]
 name = "move-core-types"
 version = "0.0.4"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -4960,7 +5013,7 @@ dependencies = [
 [[package]]
 name = "move-coverage"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -4980,7 +5033,7 @@ dependencies = [
 [[package]]
 name = "move-disassembler"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "clap 3.2.23",
@@ -4998,7 +5051,7 @@ dependencies = [
 [[package]]
 name = "move-docgen"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "codespan",
@@ -5016,7 +5069,7 @@ dependencies = [
 [[package]]
 name = "move-errmapgen"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -5030,7 +5083,7 @@ dependencies = [
 [[package]]
 name = "move-ir-compiler"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -5049,7 +5102,7 @@ dependencies = [
 [[package]]
 name = "move-ir-to-bytecode"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "codespan-reporting",
@@ -5068,7 +5121,7 @@ dependencies = [
 [[package]]
 name = "move-ir-to-bytecode-syntax"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "hex",
@@ -5081,7 +5134,7 @@ dependencies = [
 [[package]]
 name = "move-ir-types"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "hex",
@@ -5095,7 +5148,7 @@ dependencies = [
 [[package]]
 name = "move-model"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "codespan",
@@ -5121,7 +5174,7 @@ dependencies = [
 [[package]]
 name = "move-package"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -5157,7 +5210,7 @@ dependencies = [
 [[package]]
 name = "move-prover"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -5194,7 +5247,7 @@ dependencies = [
 [[package]]
 name = "move-prover-boogie-backend"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -5222,7 +5275,7 @@ dependencies = [
 [[package]]
 name = "move-read-write-set-types"
 version = "0.0.3"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "move-binary-format",
@@ -5233,7 +5286,7 @@ dependencies = [
 [[package]]
 name = "move-resource-viewer"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -5248,7 +5301,7 @@ dependencies = [
 [[package]]
 name = "move-stackless-bytecode"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "codespan",
  "codespan-reporting",
@@ -5275,7 +5328,7 @@ dependencies = [
 [[package]]
 name = "move-stackless-bytecode-interpreter"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bytecode-interpreter-crypto",
@@ -5293,7 +5346,7 @@ dependencies = [
 [[package]]
 name = "move-stdlib"
 version = "0.1.1"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "hex",
@@ -5316,7 +5369,7 @@ dependencies = [
 [[package]]
 name = "move-symbol-pool"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "once_cell",
  "serde 1.0.152",
@@ -5325,7 +5378,7 @@ dependencies = [
 [[package]]
 name = "move-table-extension"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "bcs",
@@ -5342,7 +5395,7 @@ dependencies = [
 [[package]]
 name = "move-transactional-test-runner"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "clap 3.2.23",
@@ -5374,7 +5427,7 @@ dependencies = [
 [[package]]
 name = "move-unit-test"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "better_any",
@@ -5405,7 +5458,7 @@ dependencies = [
 [[package]]
 name = "move-vm-runtime"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "better_any",
  "fail 0.4.0",
@@ -5422,7 +5475,7 @@ dependencies = [
 [[package]]
 name = "move-vm-test-utils"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "move-binary-format",
@@ -5435,7 +5488,7 @@ dependencies = [
 [[package]]
 name = "move-vm-types"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "bcs",
  "move-binary-format",
@@ -5567,7 +5620,7 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 [[package]]
 name = "mysten-metrics"
 version = "0.7.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "dashmap",
  "futures",
@@ -5586,7 +5639,7 @@ dependencies = [
 [[package]]
 name = "mysten-network"
 version = "0.2.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "bincode",
  "bytes",
@@ -5608,7 +5661,7 @@ dependencies = [
 [[package]]
 name = "mysten-util-mem"
 version = "0.11.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "cfg-if",
  "ed25519-consensus",
@@ -5627,7 +5680,7 @@ dependencies = [
 [[package]]
 name = "mysten-util-mem-derive"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "proc-macro2 1.0.51",
  "syn 1.0.107",
@@ -5658,7 +5711,7 @@ dependencies = [
 [[package]]
 name = "narwhal-config"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "arc-swap",
  "fastcrypto",
@@ -5677,7 +5730,7 @@ dependencies = [
 [[package]]
 name = "narwhal-consensus"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "arc-swap",
  "bincode",
@@ -5706,7 +5759,7 @@ dependencies = [
 [[package]]
 name = "narwhal-crypto"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "eyre",
  "fastcrypto",
@@ -5725,7 +5778,7 @@ dependencies = [
 [[package]]
 name = "narwhal-dag"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "arc-swap",
  "dashmap",
@@ -5743,7 +5796,7 @@ dependencies = [
 [[package]]
 name = "narwhal-executor"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-tower",
@@ -5782,7 +5835,7 @@ dependencies = [
 [[package]]
 name = "narwhal-network"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-tower",
@@ -5815,7 +5868,7 @@ dependencies = [
 [[package]]
 name = "narwhal-node"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "arc-swap",
@@ -5864,7 +5917,7 @@ dependencies = [
 [[package]]
 name = "narwhal-primary"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-tower",
@@ -5911,7 +5964,7 @@ dependencies = [
 [[package]]
 name = "narwhal-storage"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "dashmap",
  "fail 0.5.1",
@@ -5933,7 +5986,7 @@ dependencies = [
 [[package]]
 name = "narwhal-types"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-build",
@@ -5977,7 +6030,7 @@ dependencies = [
 [[package]]
 name = "narwhal-worker"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-tower",
@@ -7016,7 +7069,7 @@ dependencies = [
 [[package]]
 name = "prometheus-closure-metric"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "prometheus",
@@ -7458,7 +7511,7 @@ dependencies = [
 [[package]]
 name = "read-write-set"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "move-binary-format",
@@ -7473,7 +7526,7 @@ dependencies = [
 [[package]]
 name = "read-write-set-dynamic"
 version = "0.1.0"
-source = "git+https://github.com/move-language/move?rev=652badf6fd67e1d4cc2aa6dc69d63ad14083b673#652badf6fd67e1d4cc2aa6dc69d63ad14083b673"
+source = "git+https://github.com/move-language/move?rev=9b2bbcc14958f37c9adeab933f1e1d6b0db81691#9b2bbcc14958f37c9adeab933f1e1d6b0db81691"
 dependencies = [
  "anyhow",
  "move-binary-format",
@@ -7727,6 +7780,17 @@ checksum = "7e9562ea1d70c0cc63a34a22d977753b50cca91cc6b6527750463bd5dd8697bc"
 dependencies = [
  "libc",
  "librocksdb-sys",
+]
+
+[[package]]
+name = "ron"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "300a51053b1cb55c80b7a9fde4120726ddf25ca241a1cbb926626f62fb136bff"
+dependencies = [
+ "base64 0.13.1",
+ "bitflags",
+ "serde 1.0.152",
 ]
 
 [[package]]
@@ -8876,7 +8940,7 @@ checksum = "734676eb262c623cec13c3155096e08d1f8f29adce39ba17948b18dad1e54142"
 [[package]]
 name = "sui-adapter"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "bcs",
@@ -8901,7 +8965,7 @@ dependencies = [
 [[package]]
 name = "sui-config"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anyhow",
@@ -8933,8 +8997,8 @@ dependencies = [
 
 [[package]]
 name = "sui-core"
-version = "0.25.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+version = "0.26.0"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "arc-swap",
@@ -9001,7 +9065,7 @@ dependencies = [
 [[package]]
 name = "sui-cost-tables"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "bcs",
@@ -9017,7 +9081,7 @@ dependencies = [
 [[package]]
 name = "sui-framework"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "bcs",
@@ -9052,7 +9116,7 @@ dependencies = [
 [[package]]
 name = "sui-framework-build"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "fastcrypto",
@@ -9073,7 +9137,7 @@ dependencies = [
 [[package]]
 name = "sui-json"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "bcs",
@@ -9091,7 +9155,7 @@ dependencies = [
 [[package]]
 name = "sui-json-rpc"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -9131,7 +9195,7 @@ dependencies = [
 [[package]]
 name = "sui-json-rpc-types"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -9158,7 +9222,7 @@ dependencies = [
 [[package]]
 name = "sui-keys"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "bip32",
@@ -9176,7 +9240,7 @@ dependencies = [
 [[package]]
 name = "sui-macros"
 version = "0.7.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "once_cell",
  "sui-proc-macros",
@@ -9186,7 +9250,7 @@ dependencies = [
 [[package]]
 name = "sui-network"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-build",
@@ -9214,7 +9278,7 @@ dependencies = [
 [[package]]
 name = "sui-open-rpc"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "bcs",
  "schemars",
@@ -9226,7 +9290,7 @@ dependencies = [
 [[package]]
 name = "sui-open-rpc-macros"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "derive-syn-parse",
  "itertools",
@@ -9240,7 +9304,7 @@ dependencies = [
 [[package]]
 name = "sui-proc-macros"
 version = "0.7.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "msim-macros",
  "proc-macro2 1.0.51",
@@ -9252,15 +9316,15 @@ dependencies = [
 [[package]]
 name = "sui-protocol-constants"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "workspace-hack",
 ]
 
 [[package]]
 name = "sui-sdk"
-version = "0.25.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+version = "0.26.0"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -9291,7 +9355,7 @@ dependencies = [
 [[package]]
 name = "sui-simulator"
 version = "0.7.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anemo",
  "anemo-tower",
@@ -9311,7 +9375,7 @@ dependencies = [
 [[package]]
 name = "sui-storage"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -9348,7 +9412,7 @@ dependencies = [
 [[package]]
 name = "sui-transaction-builder"
 version = "0.0.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -9365,7 +9429,7 @@ dependencies = [
 [[package]]
 name = "sui-types"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "anyhow",
  "bcs",
@@ -9415,7 +9479,7 @@ dependencies = [
 [[package]]
 name = "sui-verifier"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "move-binary-format",
  "move-bytecode-verifier",
@@ -9539,7 +9603,7 @@ dependencies = [
 [[package]]
 name = "telemetry-subscribers"
 version = "0.2.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "crossterm 0.25.0",
  "once_cell",
@@ -10323,7 +10387,7 @@ checksum = "6af6ae20167a9ece4bcb41af5b80f8a1f1df981f6391189ce00fd257af04126a"
 [[package]]
 name = "typed-store"
 version = "0.4.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "async-trait",
  "bincode",
@@ -10350,7 +10414,7 @@ dependencies = [
 [[package]]
 name = "typed-store-derive"
 version = "0.3.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "proc-macro2 1.0.51",
  "quote 1.0.23",
@@ -10965,7 +11029,7 @@ dependencies = [
 [[package]]
 name = "workspace-hack"
 version = "0.1.0"
-source = "git+https://github.com/MystenLabs/sui?rev=5d3ff6b#5d3ff6b3adf299e72364bb4669cffe076f32d456"
+source = "git+https://github.com/MystenLabs/sui?rev=b63532e#b63532e36df5b1fcccff3893509259494c719a78"
 dependencies = [
  "Inflector",
  "addr2line",
@@ -10981,6 +11045,7 @@ dependencies = [
  "alloc-stdlib",
  "anemo",
  "anemo-build",
+ "anemo-cli",
  "anemo-tower",
  "anes",
  "ansi_term",
@@ -11085,8 +11150,11 @@ dependencies = [
  "clang-sys",
  "clap 2.34.0",
  "clap 3.2.23",
- "clap_derive",
- "clap_lex",
+ "clap 4.1.6",
+ "clap_derive 3.2.18",
+ "clap_derive 4.1.0",
+ "clap_lex 0.2.4",
+ "clap_lex 0.3.1",
  "clear_on_drop",
  "clipboard-win",
  "codespan",
@@ -11547,6 +11615,7 @@ dependencies = [
  "ripemd",
  "roaring",
  "rocksdb",
+ "ron",
  "rstest",
  "rstest_macros",
  "rust-ini",
