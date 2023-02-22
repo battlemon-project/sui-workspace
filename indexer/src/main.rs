@@ -27,9 +27,8 @@ async fn main() -> Result<()> {
 
     info!("Start to poll Sui Node for contract `{contract}`");
     while let Some(contract_event) = contract_events.next().await {
-        if let Err(e) = handle_contract_event(contract_event, &config).await {
-            error!("An error is occurring while I handle contract events. Error: {e:?}");
-        }
+        let Err(err) = handle_contract_event(contract_event, &config).await else { continue };
+        error!("An error is occurring while I handle contract events. Error: {err:?}");
     }
 
     panic!("Failed to get new events from Sui Node");
