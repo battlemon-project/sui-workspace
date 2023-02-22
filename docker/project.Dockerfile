@@ -62,6 +62,6 @@ ENTRYPOINT ["./entrypoint.sh"]
 # migrator
 FROM chef AS migrator
 WORKDIR /app
-COPY --from=builder /app/backend/migrations /app/backend/scripts/init_db_compose.sh ./
+COPY ./backend/migrations ./backend/scripts/init_db_compose.sh ./
 RUN chmod +x init_db_compose.sh
 ENTRYPOINT ["./init_db_compose.sh"]
