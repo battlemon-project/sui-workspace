@@ -83,6 +83,22 @@ services:
       timeout: 5s
       start_period: 10s
 
+  ipfs:
+    container_name: ipfs
+    image: ipfs/kubo:v0.18.1
+    ports:
+      - "127.0.0.1:5001:5001"
+      - "127.0.0.1:5002:5002"
+      - "127.0.0.1:8080:8080"
+      - "4001:4001"
+    restart: on-failure
+#    healthcheck:
+#      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      start_period: 10s
+
+
 configs:
   backend:
     file: config/backend_production.toml
